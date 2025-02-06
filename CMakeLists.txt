@@ -19,6 +19,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(strings_test
         include/string_utils.h
         src/string_utils.c
+        src/main.c
 )
 
 # Link Google Test libraries

@@ -1,2 +1,4 @@
-*.cmake linguist-generated
-*.cmake linguist-language=null
+*.c linguist-detectable
+*.h linguist-detectable
+CMakeLists.txt linguist-vendored
+*.cmake linguist-vendored
