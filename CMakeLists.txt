@@ -1,47 +1,29 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(googletest-distribution)
-set(GOOGLETEST_VERSION 1.12.1)
+project(c_utils_tests)
 
-include(FetchContent)
-FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP true
-)
-
-FetchContent_MakeAvailable(googletest)
-
-if(NOT CYGWIN AND NOT MSYS AND NOT ${CMAKE_SYSTEM_NAME} STREQUAL QNX)
-    set(CMAKE_CXX_EXTENSIONS OFF)
-endif()
-
+# Enable testing
 enable_testing()
 
-include(CMakeDependentOption)
-include(GNUInstallDirs)
+# Include FetchContent module
+include(FetchContent)
 
-# Note that googlemock target already builds googletest.
-option(BUILD_GMOCK "Builds the googlemock subproject" ON)
-option(INSTALL_GTEST "Enable installation of googletest. (Projects embedding googletest may want to turn this OFF.)" ON)
-option(GTEST_HAS_ABSL "Use Abseil and RE2. Requires Abseil and RE2 to be separately added to the build." OFF)
+# Download and include Google Test
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
+)
+FetchContent_MakeAvailable(googletest)
 
-if(GTEST_HAS_ABSL)
-    if(NOT TARGET absl::base)
-        find_package(absl REQUIRED)
-    endif()
-    if(NOT TARGET re2::re2)
-        find_package(re2 REQUIRED)
-    endif()
-endif()
+# Add the test executable
+add_executable(strings_test
+        include/string_utils.h
+        src/string_utils.c
+)
 
-if(BUILD_GMOCK)
-    if(NOT TARGET gmock)
-        add_subdirectory(${googletest_SOURCE_DIR}/googlemock)
-    endif()
-else()
-    if(NOT TARGET gtest)
-        add_subdirectory(${googletest_SOURCE_DIR}/googletest)
-    endif()
-endif()
-add_executable(new_target main.c)
+# Link Google Test libraries
+target_link_libraries(strings_test gtest gtest_main)
+target_include_directories(strings_test PRIVATE include)
+
+# Add tests
+add_test(NAME strings_test COMMAND strings_test)
