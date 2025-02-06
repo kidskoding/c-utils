@@ -1,1 +1,2 @@
-*.cmake linguist-vendored
+*.cmake linguist-generated
+*.cmake linguist-language=null
