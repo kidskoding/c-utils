@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/Users/anirudh/UIUC/go-mama-27/personal-projects/c-utils",
+  "arguments": ["/Library/Developer/CommandLineTools/usr/bin/clang", "-c", "-Qunused-arguments", "-isysroot", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk", "-fvisibility=hidden", "-O3", "-std=c99", "-Iinclude", "-Wall", "-Wextra", "-DNDEBUG", "-o", "build/.objs/c-utils/macosx/arm64/release/src/main.c.o", "src/main.c"],
+  "file": "src/main.c"
+}]

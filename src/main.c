@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include "string_impl.h"
 
-int main(void) {
-    printf("Hello, World!\n");
+int main() {
+    String* str = new("Hello, World!");
+    printf("%s\n", str->data);
     return 0;
 }
